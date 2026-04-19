@@ -18,33 +18,33 @@
         html {
             scroll-behavior: smooth;
         }
-        body {
-            background-color: #0D0D0D;
-            color: #00FF41;
-            font-family: 'Fira Code', 'Share Tech Mono', monospace;
+        body { 
+            background: #0D0D0D; 
+            color: #00FF41; 
+            font-family: 'Fira Code', 'Share Tech Mono', monospace; 
             overflow-x: hidden;
         }
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #003b00;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #008f11;
-        }
-        .crt-overlay {
-            pointer-events: none;
+        
+        /* Matrix Rain Canvas */
+        #matrix-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 9999;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* CRT Overlay */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
             background: repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 2px);
         }
         .crt-overlay:after {
@@ -57,111 +57,22 @@
             background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
             pointer-events: none;
         }
-        .text-glow {
-            text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41, 0 0 20px #00FF41;
-        }
-        .text-glow-sm {
-            text-shadow: 0 0 3px #00FF41, 0 0 6px #00FF41;
-        }
-        .matrix-card {
-            background: #00ff4105;
-            border: 1px solid rgba(0,255,65,0.15);
-            backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
-            padding: 1.5rem;
-            border-radius: 0.25rem;
-        }
-        .matrix-card:hover {
-            border-color: #00ff4180;
-            background: #00ff410d;
-            box-shadow: 0 0 15px #00ff4133, 0 0 30px #00ff411a;
-            transform: translateY(-2px);
-        }
-        .blink {
-            animation: blink 1s step-end infinite;
-        }
+        
+        /* Text Effects */
+        .text-glow { text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41, 0 0 20px #00FF41; }
+        .text-glow-sm { text-shadow: 0 0 3px #00FF41, 0 0 6px #00FF41; }
+        .blink { animation: blink 1s step-end infinite; }
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,255,65,0.2);
-        }
-        .nav-content {
-            max-width: 72rem;
-            margin: 0 auto;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #00FF41;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-        .nav-link {
-            color: #008f11;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .nav-link:before {
-            content: "> ";
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .nav-link:hover:before {
-            opacity: 1;
-        }
-        .nav-link:hover {
-            color: #00FF41;
-            text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41;
-        }
-        .section {
-            min-height: 100vh;
-            padding: 6rem 1.5rem 2rem;
-            max-width: 72rem;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 20px #00FF41;
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 20px #00FF41; }
-            50% { text-shadow: 0 0 30px #00FF41, 0 0 40px #00FF41; }
-        }
+        
+        /* Typing Animation */
         .typing {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+            overflow: hidden;
+            white-space: nowrap;
             border-right: 2px solid #00FF41;
             animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
-            white-space: nowrap;
-            overflow: hidden;
         }
         @keyframes typing {
             0% { width: 0; }
@@ -171,6 +82,96 @@
             0%, 100% { border-color: #00ff41; }
             50% { border-color: transparent; }
         }
+        
+        /* Glow Pulse */
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 20px #00FF41; }
+            50% { text-shadow: 0 0 30px #00FF41, 0 0 40px #00FF41; }
+        }
+        .glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
+        
+        /* Navigation */
+        .nav { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 100;
+            background: rgba(13, 13, 13, 0.95); 
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,255,65,0.2);
+        }
+        .nav-content { 
+            max-width: 72rem; 
+            margin: 0 auto; 
+            padding: 1rem 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .nav-logo { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            color: #00FF41; 
+        }
+        .nav-links { 
+            display: flex; 
+            gap: 1.5rem; 
+            list-style: none; 
+        }
+        .nav-link { 
+            color: #008f11; 
+            text-decoration: none; 
+            transition: all 0.3s; 
+            position: relative;
+        }
+        .nav-link:before {
+            content: "> ";
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .nav-link:hover:before { opacity: 1; }
+        .nav-link:hover { 
+            color: #00FF41; 
+            text-shadow: 0 0 5px #00FF41, 0 0 10px #00FF41; 
+        }
+        
+        /* Content Container */
+        .container { 
+            position: relative;
+            z-index: 10;
+            max-width: 72rem; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        
+        /* Sections */
+        .section { 
+            padding: 80px 0; 
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Cards */
+        .matrix-card { 
+            background: rgba(0, 255, 65, 0.05); 
+            border: 1px solid rgba(0,255,65,0.15); 
+            padding: 1.5rem; 
+            margin: 20px 0; 
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        .matrix-card:hover { 
+            border-color: #00ff4180;
+            background: rgba(0,255,65,0.1);
+            box-shadow: 0 0 15px #00ff4133, 0 0 30px #00ff411a; 
+            transform: translateY(-2px); 
+        }
+        
+        /* Command Cards */
         .commands {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -184,6 +185,7 @@
             border-radius: 0.25rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            backdrop-filter: blur(4px);
         }
         .command-card:hover {
             background: rgba(0,255,65,0.1);
@@ -199,53 +201,39 @@
             color: #008f11;
             font-size: 0.875rem;
         }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        
+        /* Projects Grid */
+        .projects { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
         }
-        .project-card {
-            background: rgba(0,255,65,0.05);
-            border: 1px solid rgba(0,255,65,0.15);
-            padding: 1.5rem;
+        .project-card { 
+            background: rgba(0, 255, 65, 0.05); 
+            border: 1px solid rgba(0, 255, 65, 0.15); 
+            padding: 1.5rem; 
             border-radius: 0.25rem;
             transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
         }
-        .project-card:hover {
-            background: rgba(0,255,65,0.1);
+        .project-card:hover { 
             border-color: #00ff4180;
-            box-shadow: 0 0 15px #00ff4133, 0 0 30px #00ff411a;
-            transform: translateY(-2px);
-        }
-        .project-card h3 {
-            color: #00FF41;
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
-        .project-card .tagline {
-            color: #20c20e;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-        .project-card p {
-            color: #008f11;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        .tech-tag {
             background: rgba(0,255,65,0.1);
-            border: 1px solid rgba(0,255,65,0.3);
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            color: #00FF41;
+            box-shadow: 0 0 15px #00ff4133, 0 0 30px #00ff411a; 
+            transform: translateY(-2px); 
+        }
+        .project-title { color: #00FF41; font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .project-tagline { color: #20c20e; font-style: italic; margin-bottom: 1rem; }
+        
+        /* Tech Tags */
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+        .tech-tag { 
+            background: rgba(0, 255, 65, 0.1); 
+            border: 1px solid rgba(0, 255, 65, 0.3); 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 0.25rem; 
+            font-size: 0.75rem; 
             transition: all 0.3s ease;
         }
         .tech-tag:hover {
@@ -253,39 +241,30 @@
             border-color: #00FF41;
             box-shadow: 0 0 8px #00ff414d;
         }
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+        
+        /* Contact Grid */
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 2rem; 
         }
-        .contact-card {
-            background: rgba(0,255,65,0.05);
-            border: 1px solid rgba(0,255,65,0.15);
-            padding: 1.5rem;
+        .contact-card { 
+            background: rgba(0, 255, 65, 0.05); 
+            border: 1px solid rgba(0, 255, 65, 0.15); 
+            padding: 1.5rem; 
             border-radius: 0.25rem;
+            text-align: center;
             transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
         }
         .contact-card:hover {
-            background: rgba(0,255,65,0.1);
             border-color: #00ff4180;
+            background: rgba(0,255,65,0.1);
             box-shadow: 0 0 10px #00ff414d;
         }
-        .footer {
-            border-top: 1px solid rgba(0,59,0,0.2);
-            padding: 1.5rem;
-            text-align: center;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 10;
-        }
-        .footer p {
-            font-size: 0.75rem;
-            color: #003b00;
-        }
-        .footer .green {
-            color: #00FF41;
-        }
+        
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: 3rem;
@@ -316,33 +295,50 @@
             border: 2px solid #0D0D0D;
             box-shadow: 0 0 8px #00FF41;
         }
+        
+        /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
+        
+        /* Footer */
+        .footer { 
+            text-align: center; 
+            padding: 1.5rem; 
+            border-top: 1px solid rgba(0,59,0,0.2); 
+            margin-top: 2rem; 
+            position: relative;
+            z-index: 10;
+        }
+        .footer p { 
+            font-size: 0.75rem; 
+            color: #003b00; 
+        }
+        .footer .green { color: #00FF41; }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .typing {
-                font-size: 1rem;
-            }
+            .nav-links { display: none; }
+            .section { padding: 60px 0; }
+            .commands { grid-template-columns: 1fr; }
+            .projects { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
+    
     <!-- CRT Overlay -->
     <div class="crt-overlay"></div>
 
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-content">
-            <div class="nav-logo">pradeep@portfolio:~$</div>
+            <div class="text-glow">pradeep@portfolio:~$</div>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link">home</a></li>
                 <li><a href="#about" class="nav-link">about</a></li>
@@ -352,239 +348,281 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="section hero">
-        <h1 class="text-glow">Pradeep Gadipalli</h1>
-        <div class="typing">Product Management | Digital Transformation | Data Visualization | Agile</div>
-        <div class="commands">
-            <div class="command-card" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
-                <h3>$ cat about.txt</h3>
-                <p>16+ years in Healthcare IT & Business Analysis</p>
-            </div>
-            <div class="command-card" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
-                <h3>$ ls projects/</h3>
-                <p>VelocityBA, Claim Denial Predictor, CodeOps Suite</p>
-            </div>
-            <div class="command-card" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-                <h3>$ mail contact</h3>
-                <p>Get in touch for collaboration</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ whoami</h2>
-        
-        <!-- Personal Info -->
-        <div class="matrix-card" style="margin-bottom: 2rem;">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Personal Information</h3>
-            <p><strong>Email:</strong> pradisdeep@gmail.com</p>
-            <p><strong>LinkedIn:</strong> linkedin.com/in/pradeepgadipalli</p>
-            <p><strong>Location:</strong> Hyderabad, India</p>
-        </div>
-
-        <!-- Professional Summary -->
-        <div class="matrix-card" style="margin-bottom: 2rem;">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Summary</h3>
-            <p style="margin-bottom: 1rem; line-height: 1.6;">
-                Senior Business Analyst with 16+ years of experience in healthcare IT, digital transformation, 
-                and data-driven decision making. Expertise in requirements analysis, process optimization, 
-                and stakeholder management. Proven track record of delivering complex projects 
-                in healthcare revenue cycle management, business intelligence, and system integration.
-            </p>
-        </div>
-
-        <!-- Skills -->
-        <div class="matrix-card" style="margin-bottom: 2rem;">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Technical Skills</h3>
-            <div class="skills-grid">
-                <div>
-                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Business Analysis</h4>
-                    <p style="font-size: 0.875rem;">Requirements Engineering, Process Mapping, Gap Analysis, User Stories, Use Cases</p>
+    <div class="container">
+        <section id="home" class="section">
+            <h1 class="text-glow glow-pulse" style="font-size: 3rem; margin-bottom: 1rem; text-align: center;">Pradeep Gadipalli</h1>
+            <p class="typing" style="font-size: 1.25rem; margin-bottom: 2rem; text-align: center;">Product Management | Digital Transformation | Data Visualization | Agile</p>
+            
+            <div class="commands">
+                <div class="command-card" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                    <h3>$ cat about.txt</h3>
+                    <p>16+ years in Healthcare IT & Business Analysis</p>
                 </div>
-                <div>
-                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Data & Analytics</h4>
-                    <p style="font-size: 0.875rem;">SQL, Python, Tableau, Power BI, Data Analysis, Statistical Analysis</p>
+                <div class="command-card" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                    <h3>$ ls projects/</h3>
+                    <p>VelocityBA, Claim Denial Predictor, CodeOps Suite</p>
                 </div>
-                <div>
-                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Healthcare IT</h4>
-                    <p style="font-size: 0.875rem;">Revenue Cycle Management, EMR/EHR, HIPAA, HL7, Medical Billing</p>
-                </div>
-                <div>
-                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Development Tools</h4>
-                    <p style="font-size: 0.875rem;">JIRA, Confluence, Azure DevOps, Git, Agile/Scrum Methodologies</p>
+                <div class="command-card" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+                    <h3>$ mail contact</h3>
+                    <p>Get in touch for collaboration</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Experience Timeline -->
-        <div class="matrix-card" style="margin-bottom: 2rem;">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Experience</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4 style="color: #20c20e;">Senior Business Analyst - Sutherland</h4>
-                    <p style="color: #008f11; font-size: 0.875rem;">2020 - Present | Hyderabad, India</p>
-                    <p style="margin-top: 0.5rem;">
-                        Leading business analysis for healthcare clients, requirement gathering, process optimization, 
-                        and stakeholder management. Developed comprehensive business requirements documents, 
-                        facilitated workshops, and ensured alignment between business needs and technical solutions.
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <h4 style="color: #20c20e;">Business Analyst - Sutherland</h4>
-                    <p style="color: #008f11; font-size: 0.875rem;">2015 - 2020 | Hyderabad, India</p>
-                    <p style="margin-top: 0.5rem;">
-                        Requirements analysis, system design, and client relationship management. 
-                        Worked on multiple healthcare IT projects including EMR implementations, 
-                        revenue cycle optimization, and business intelligence solutions.
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <h4 style="color: #20c20e;">Business Analyst - Optum</h4>
-                    <p style="color: #008f11; font-size: 0.875rem;">2012 - 2015 | Hyderabad, India</p>
-                    <p style="margin-top: 0.5rem;">
-                        Analyzed business requirements for healthcare insurance products, 
-                        developed functional specifications, and coordinated with development teams 
-                        for system enhancements and new feature implementations.
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <h4 style="color: #20c20e;">Business Analyst - Dell</h4>
-                    <p style="color: #008f11; font-size: 0.875rem;">2008 - 2012 | Hyderabad, India</p>
-                    <p style="margin-top: 0.5rem;">
-                        Business process analysis, requirements gathering for IT infrastructure projects, 
-                        and stakeholder communication. Worked on various internal systems 
-                        and process improvement initiatives.
-                    </p>
-                </div>
+        <section id="about" class="section">
+            <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ whoami</h2>
+            
+            <!-- Personal Info -->
+            <div class="matrix-card" style="margin-bottom: 2rem;">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Personal Information</h3>
+                <p><strong>Email:</strong> pradisdeep@gmail.com</p>
+                <p><strong>LinkedIn:</strong> linkedin.com/in/pradeepgadipalli</p>
+                <p><strong>Location:</strong> Hyderabad, India</p>
             </div>
-        </div>
 
-        <!-- Certifications -->
-        <div class="matrix-card" style="margin-bottom: 2rem;">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Certifications</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                <div>
-                    <p><strong>Certified Business Analysis Professional (CBAP)</strong></p>
-                    <p style="color: #008f11; font-size: 0.875rem;">International Institute of Business Analysis (IIBA)</p>
-                </div>
-                <div>
-                    <p><strong>Certified ScrumMaster (CSM)</strong></p>
-                    <p style="color: #008f11; font-size: 0.875rem;">Scrum Alliance</p>
-                </div>
-                <div>
-                    <p><strong>ITIL Foundation</strong></p>
-                    <p style="color: #008f11; font-size: 0.875rem;">AXELOS</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Awards -->
-        <div class="matrix-card">
-            <h3 style="color: #00FF41; margin-bottom: 1rem;">Awards & Recognition</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-                <div>
-                    <p><strong>Excellence in Business Analysis Award</strong></p>
-                    <p style="color: #008f11; font-size: 0.875rem;">Sutherland, 2021</p>
-                </div>
-                <div>
-                    <p><strong>Best Process Improvement Initiative</strong></p>
-                    <p style="color: #008f11; font-size: 0.875rem;">Optum, 2014</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ ls -la projects/</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>VelocityBA</h3>
-                <p class="tagline">Accelerating Requirements, Powering Delivery.</p>
-                <p>
-                    Full-stack AI-powered Business Analyst workbench with 6 core modules: BRD Generator, 
-                    Meeting Transcript Analyzer, Test Case Generator, Process Map, Gap Analysis, and Admin Dashboard. 
-                    Features multi-LLM support, PHI detection, Firebase authentication, and ReactFlow visualizations.
+            <!-- Professional Summary -->
+            <div class="matrix-card" style="margin-bottom: 2rem;">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Summary</h3>
+                <p style="margin-bottom: 1rem; line-height: 1.6;">
+                    Senior Business Analyst with 16+ years of experience in healthcare IT, digital transformation, 
+                    and data-driven decision making. Expertise in requirements analysis, process optimization, 
+                    and stakeholder management. Proven track record of delivering complex projects 
+                    in healthcare revenue cycle management, business intelligence, and system integration.
                 </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">React 18</span>
-                    <span class="tech-tag">Vite</span>
-                    <span class="tech-tag">TailwindCSS</span>
-                    <span class="tech-tag">Azure OpenAI</span>
-                    <span class="tech-tag">Groq API</span>
-                    <span class="tech-tag">Firebase Auth</span>
+            </div>
+
+            <!-- Skills -->
+            <div class="matrix-card" style="margin-bottom: 2rem;">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Technical Skills</h3>
+                <div class="skills-grid">
+                    <div>
+                        <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Business Analysis</h4>
+                        <p style="font-size: 0.875rem;">Requirements Engineering, Process Mapping, Gap Analysis, User Stories, Use Cases</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Data & Analytics</h4>
+                        <p style="font-size: 0.875rem;">SQL, Python, Tableau, Power BI, Data Analysis, Statistical Analysis</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Healthcare IT</h4>
+                        <p style="font-size: 0.875rem;">Revenue Cycle Management, EMR/EHR, HIPAA, HL7, Medical Billing</p>
+                    </div>
+                    <div>
+                        <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Development Tools</h4>
+                        <p style="font-size: 0.875rem;">JIRA, Confluence, Azure DevOps, Git, Agile/Scrum Methodologies</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <h3>Claim Denial Predictor</h3>
-                <p class="tagline">Predict. Prevent. Maximize Revenue.</p>
-                <p>
-                    Healthcare revenue cycle analytics suite with two predictive models: (1) Denial Predictor - 
-                    MLPClassifier neural network with hidden layers (100, 50), ReLU activation, Adam optimizer. 
-                    (2) Payment-Without-Touch Predictor - Logistic Regression with balanced class weights. 
-                    Both models use SQL-side visit-level aggregation with 25+ engineered features.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">scikit-learn</span>
-                    <span class="tech-tag">MLPClassifier</span>
-                    <span class="tech-tag">Logistic Regression</span>
-                    <span class="tech-tag">SQL Server</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">ReactFlow</span>
+            <!-- Experience Timeline -->
+            <div class="matrix-card" style="margin-bottom: 2rem;">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Experience</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4 style="color: #20c20e;">Senior Business Analyst - Sutherland</h4>
+                        <p style="color: #008f11; font-size: 0.875rem;">2020 - Present | Hyderabad, India</p>
+                        <p style="margin-top: 0.5rem;">
+                            Leading business analysis for healthcare clients, requirement gathering, process optimization, 
+                            and stakeholder management. Developed comprehensive business requirements documents, 
+                            facilitated workshops, and ensured alignment between business needs and technical solutions.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color: #20c20e;">Business Analyst - Sutherland</h4>
+                        <p style="color: #008f11; font-size: 0.875rem;">2015 - 2020 | Hyderabad, India</p>
+                        <p style="margin-top: 0.5rem;">
+                            Requirements analysis, system design, and client relationship management. 
+                            Worked on multiple healthcare IT projects including EMR implementations, 
+                            revenue cycle optimization, and business intelligence solutions.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color: #20c20e;">Business Analyst - Optum</h4>
+                        <p style="color: #008f11; font-size: 0.875rem;">2012 - 2015 | Hyderabad, India</p>
+                        <p style="margin-top: 0.5rem;">
+                            Analyzed business requirements for healthcare insurance products, 
+                            developed functional specifications, and coordinated with development teams 
+                            for system enhancements and new feature implementations.
+                        </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color: #20c20e;">Business Analyst - Dell</h4>
+                        <p style="color: #008f11; font-size: 0.875rem;">2008 - 2012 | Hyderabad, India</p>
+                        <p style="margin-top: 0.5rem;">
+                            Business process analysis, requirements gathering for IT infrastructure projects, 
+                            and stakeholder communication. Worked on various internal systems 
+                            and process improvement initiatives.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card">
-                <h3>CodeOps Suite</h3>
-                <p class="tagline">Code Management & Release Management - Coming Soon.</p>
-                <p>
-                    Solving a real-world problem: codebases scattered across TFS make it nearly impossible to 
-                    trace impact areas when a requirement or change request arrives. CodeOps Suite maps code 
-                    dependencies, provides AI-powered impact analysis, human code review workflows, step-by-step 
-                    debugging, and performance profiling.
-                </p>
-                <div class="tech-tags">
-                    <span class="tech-tag">Impact Analysis</span>
-                    <span class="tech-tag">TFS Integration</span>
-                    <span class="tech-tag">Code Review</span>
-                    <span class="tech-tag">Performance Profiling</span>
-                    <span class="tech-tag">AI-Assisted</span>
+            <!-- Certifications -->
+            <div class="matrix-card" style="margin-bottom: 2rem;">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Certifications</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div>
+                        <p><strong>Certified Business Analysis Professional (CBAP)</strong></p>
+                        <p style="color: #008f11; font-size: 0.875rem;">International Institute of Business Analysis (IIBA)</p>
+                    </div>
+                    <div>
+                        <p><strong>Certified ScrumMaster (CSM)</strong></p>
+                        <p style="color: #008f11; font-size: 0.875rem;">Scrum Alliance</p>
+                    </div>
+                    <div>
+                        <p><strong>ITIL Foundation</strong></p>
+                        <p style="color: #008f11; font-size: 0.875rem;">AXELOS</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ contact --all</h2>
-        <div class="contact-info">
-            <div class="contact-card">
-                <h3 style="color: #00FF41; margin-bottom: 1rem;">Email</h3>
-                <p style="color: #20c20e;">pradisdeep@gmail.com</p>
+            <!-- Awards -->
+            <div class="matrix-card">
+                <h3 style="color: #00FF41; margin-bottom: 1rem;">Awards & Recognition</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div>
+                        <p><strong>Excellence in Business Analysis Award</strong></p>
+                        <p style="color: #008f11; font-size: 0.875rem;">Sutherland, 2021</p>
+                    </div>
+                    <div>
+                        <p><strong>Best Process Improvement Initiative</strong></p>
+                        <p style="color: #008f11; font-size: 0.875rem;">Optum, 2014</p>
+                    </div>
+                </div>
             </div>
-            <div class="contact-card">
-                <h3 style="color: #00FF41; margin-bottom: 1rem;">LinkedIn</h3>
-                <p style="color: #20c20e;">linkedin.com/in/pradeepgadipalli</p>
-            </div>
-            <div class="contact-card">
-                <h3 style="color: #00FF41; margin-bottom: 1rem;">Location</h3>
-                <p style="color: #20c20e;">Hyderabad, India</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <section id="projects" class="section">
+            <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ ls -la projects/</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3 class="project-title">VelocityBA</h3>
+                    <p class="tagline">Accelerating Requirements, Powering Delivery.</p>
+                    <p>
+                        Full-stack AI-powered Business Analyst workbench with 6 core modules: BRD Generator, 
+                        Meeting Transcript Analyzer, Test Case Generator, Process Map, Gap Analysis, and Admin Dashboard. 
+                        Features multi-LLM support, PHI detection, Firebase authentication, and ReactFlow visualizations.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React 18</span>
+                        <span class="tech-tag">Vite</span>
+                        <span class="tech-tag">TailwindCSS</span>
+                        <span class="tech-tag">Azure OpenAI</span>
+                        <span class="tech-tag">Groq API</span>
+                        <span class="tech-tag">Firebase Auth</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Claim Denial Predictor</h3>
+                    <p class="tagline">Predict. Prevent. Maximize Revenue.</p>
+                    <p>
+                        Healthcare revenue cycle analytics suite with two predictive models: (1) Denial Predictor - 
+                        MLPClassifier neural network with hidden layers (100, 50), ReLU activation, Adam optimizer. 
+                        (2) Payment-Without-Touch Predictor - Logistic Regression with balanced class weights. 
+                        Both models use SQL-side visit-level aggregation with 25+ engineered features.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">MLPClassifier</span>
+                        <span class="tech-tag">Logistic Regression</span>
+                        <span class="tech-tag">SQL Server</span>
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">ReactFlow</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">CodeOps Suite</h3>
+                    <p class="tagline">Code Management & Release Management - Coming Soon.</p>
+                    <p>
+                        Solving a real-world problem: codebases scattered across TFS make it nearly impossible to 
+                        trace impact areas when a requirement or change request arrives. CodeOps Suite maps code 
+                        dependencies, provides AI-powered impact analysis, human code review workflows, step-by-step 
+                        debugging, and performance profiling.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Impact Analysis</span>
+                        <span class="tech-tag">TFS Integration</span>
+                        <span class="tech-tag">Code Review</span>
+                        <span class="tech-tag">Performance Profiling</span>
+                        <span class="tech-tag">AI-Assisted</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ contact --all</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3 style="color: #00FF41; margin-bottom: 1rem;">Email</h3>
+                    <p style="color: #20c20e;">pradisdeep@gmail.com</p>
+                </div>
+                <div class="contact-card">
+                    <h3 style="color: #00FF41; margin-bottom: 1rem;">LinkedIn</h3>
+                    <p style="color: #20c20e;">linkedin.com/in/pradeepgadipalli</p>
+                </div>
+                <div class="contact-card">
+                    <h3 style="color: #00FF41; margin-bottom: 1rem;">Location</h3>
+                    <p style="color: #20c20e;">Hyderabad, India</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <footer class="footer">
         <p><span class="green">{'>'}</span> Designed & Built by Pradeep Gadipalli</p>
         <p style="margin-top: 0.5rem;"><span class="green">{'>'}</span> "There is no spoon." - The Matrix</p>
     </footer>
 
     <script>
-        // Simple smooth scroll for navigation
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+        
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -594,11 +632,9 @@
                 }
             });
         });
-
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('%c Matrix Portfolio Initialized ', 'background: #0D0D0D; color: #00FF41; font-family: monospace;');
-        });
+        
+        // Console message
+        console.log('%c Matrix Portfolio Initialized ', 'background: #0D0D0D; color: #00FF41; font-family: monospace;');
     </script>
 </body>
 </html>
