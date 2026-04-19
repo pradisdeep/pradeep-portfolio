@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pradeep Gadipalli | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0D0D0D;
+            color: #00FF41;
+            font-family: 'Fira Code', 'Share Tech Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #00FF41;
+            animation: glow 2s ease-in-out infinite;
+        }
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px #00FF41; }
+            50% { text-shadow: 0 0 30px #00FF41, 0 0 40px #00FF41; }
+        }
+        .links {
+            margin-top: 2rem;
+        }
+        .links a {
+            color: #00FF41;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #00FF41;
+            border-radius: 4px;
+            margin: 0 0.5rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .links a:hover {
+            background-color: #00FF41;
+            color: #0D0D0D;
+            box-shadow: 0 0 15px #00FF41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pradeep Gadipalli</h1>
+        <p>Product Management | Digital Transformation | Data Visualization | Agile</p>
+        <p>16+ years in Healthcare IT & Business Analysis</p>
+        <div class="links">
+            <a href="https://www.linkedin.com/in/pradeepgadipalli">LinkedIn</a>
+            <a href="mailto:pradisdeep@gmail.com">Email</a>
+        </div>
+        <p style="margin-top: 3rem; font-size: 0.9rem; opacity: 0.7;">
+            Matrix-themed Portfolio <span class="blink">_</span>
+        </p>
+    </div>
+</body>
+</html>
