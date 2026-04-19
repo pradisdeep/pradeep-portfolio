@@ -286,6 +286,42 @@
         .footer .green {
             color: #00FF41;
         }
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.25rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00FF41, #003b00);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.75rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00FF41;
+            border: 2px solid #0D0D0D;
+            box-shadow: 0 0 8px #00FF41;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -339,39 +375,123 @@
     <!-- About Section -->
     <section id="about" class="section">
         <h2 class="text-glow" style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center;">$ whoami</h2>
-        <div class="matrix-card">
+        
+        <!-- Personal Info -->
+        <div class="matrix-card" style="margin-bottom: 2rem;">
+            <h3 style="color: #00FF41; margin-bottom: 1rem;">Personal Information</h3>
+            <p><strong>Email:</strong> pradisdeep@gmail.com</p>
+            <p><strong>LinkedIn:</strong> linkedin.com/in/pradeepgadipalli</p>
+            <p><strong>Location:</strong> Hyderabad, India</p>
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="matrix-card" style="margin-bottom: 2rem;">
             <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Summary</h3>
             <p style="margin-bottom: 1rem; line-height: 1.6;">
                 Senior Business Analyst with 16+ years of experience in healthcare IT, digital transformation, 
                 and data-driven decision making. Expertise in requirements analysis, process optimization, 
-                and stakeholder management.
+                and stakeholder management. Proven track record of delivering complex projects 
+                in healthcare revenue cycle management, business intelligence, and system integration.
             </p>
-            
-            <h3 style="color: #00FF41; margin-bottom: 1rem; margin-top: 2rem;">Skills</h3>
-            <div class="tech-tags">
-                <span class="tech-tag">Business Analysis</span>
-                <span class="tech-tag">Requirements Engineering</span>
-                <span class="tech-tag">Process Mapping</span>
-                <span class="tech-tag">Data Analysis</span>
-                <span class="tech-tag">Healthcare IT</span>
-                <span class="tech-tag">Agile/Scrum</span>
-                <span class="tech-tag">SQL</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Tableau</span>
-                <span class="tech-tag">Confluence</span>
-                <span class="tech-tag">JIRA</span>
-            </div>
+        </div>
 
-            <h3 style="color: #00FF41; margin-bottom: 1rem; margin-top: 2rem;">Experience</h3>
-            <div style="margin-bottom: 1.5rem;">
-                <h4 style="color: #20c20e;">Senior Business Analyst - Sutherland</h4>
-                <p style="color: #008f11; font-size: 0.875rem;">2020 - Present</p>
-                <p style="margin-top: 0.5rem;">Leading business analysis for healthcare clients, requirement gathering, and process optimization.</p>
+        <!-- Skills -->
+        <div class="matrix-card" style="margin-bottom: 2rem;">
+            <h3 style="color: #00FF41; margin-bottom: 1rem;">Technical Skills</h3>
+            <div class="skills-grid">
+                <div>
+                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Business Analysis</h4>
+                    <p style="font-size: 0.875rem;">Requirements Engineering, Process Mapping, Gap Analysis, User Stories, Use Cases</p>
+                </div>
+                <div>
+                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Data & Analytics</h4>
+                    <p style="font-size: 0.875rem;">SQL, Python, Tableau, Power BI, Data Analysis, Statistical Analysis</p>
+                </div>
+                <div>
+                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Healthcare IT</h4>
+                    <p style="font-size: 0.875rem;">Revenue Cycle Management, EMR/EHR, HIPAA, HL7, Medical Billing</p>
+                </div>
+                <div>
+                    <h4 style="color: #20c20e; margin-bottom: 0.5rem;">Development Tools</h4>
+                    <p style="font-size: 0.875rem;">JIRA, Confluence, Azure DevOps, Git, Agile/Scrum Methodologies</p>
+                </div>
             </div>
-            <div style="margin-bottom: 1.5rem;">
-                <h4 style="color: #20c20e;">Business Analyst - Sutherland</h4>
-                <p style="color: #008f11; font-size: 0.875rem;">2015 - 2020</p>
-                <p style="margin-top: 0.5rem;">Requirements analysis, system design, and client relationship management.</p>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="matrix-card" style="margin-bottom: 2rem;">
+            <h3 style="color: #00FF41; margin-bottom: 1rem;">Professional Experience</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 style="color: #20c20e;">Senior Business Analyst - Sutherland</h4>
+                    <p style="color: #008f11; font-size: 0.875rem;">2020 - Present | Hyderabad, India</p>
+                    <p style="margin-top: 0.5rem;">
+                        Leading business analysis for healthcare clients, requirement gathering, process optimization, 
+                        and stakeholder management. Developed comprehensive business requirements documents, 
+                        facilitated workshops, and ensured alignment between business needs and technical solutions.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #20c20e;">Business Analyst - Sutherland</h4>
+                    <p style="color: #008f11; font-size: 0.875rem;">2015 - 2020 | Hyderabad, India</p>
+                    <p style="margin-top: 0.5rem;">
+                        Requirements analysis, system design, and client relationship management. 
+                        Worked on multiple healthcare IT projects including EMR implementations, 
+                        revenue cycle optimization, and business intelligence solutions.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #20c20e;">Business Analyst - Optum</h4>
+                    <p style="color: #008f11; font-size: 0.875rem;">2012 - 2015 | Hyderabad, India</p>
+                    <p style="margin-top: 0.5rem;">
+                        Analyzed business requirements for healthcare insurance products, 
+                        developed functional specifications, and coordinated with development teams 
+                        for system enhancements and new feature implementations.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4 style="color: #20c20e;">Business Analyst - Dell</h4>
+                    <p style="color: #008f11; font-size: 0.875rem;">2008 - 2012 | Hyderabad, India</p>
+                    <p style="margin-top: 0.5rem;">
+                        Business process analysis, requirements gathering for IT infrastructure projects, 
+                        and stakeholder communication. Worked on various internal systems 
+                        and process improvement initiatives.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="matrix-card" style="margin-bottom: 2rem;">
+            <h3 style="color: #00FF41; margin-bottom: 1rem;">Certifications</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                <div>
+                    <p><strong>Certified Business Analysis Professional (CBAP)</strong></p>
+                    <p style="color: #008f11; font-size: 0.875rem;">International Institute of Business Analysis (IIBA)</p>
+                </div>
+                <div>
+                    <p><strong>Certified ScrumMaster (CSM)</strong></p>
+                    <p style="color: #008f11; font-size: 0.875rem;">Scrum Alliance</p>
+                </div>
+                <div>
+                    <p><strong>ITIL Foundation</strong></p>
+                    <p style="color: #008f11; font-size: 0.875rem;">AXELOS</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Awards -->
+        <div class="matrix-card">
+            <h3 style="color: #00FF41; margin-bottom: 1rem;">Awards & Recognition</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div>
+                    <p><strong>Excellence in Business Analysis Award</strong></p>
+                    <p style="color: #008f11; font-size: 0.875rem;">Sutherland, 2021</p>
+                </div>
+                <div>
+                    <p><strong>Best Process Improvement Initiative</strong></p>
+                    <p style="color: #008f11; font-size: 0.875rem;">Optum, 2014</p>
+                </div>
             </div>
         </div>
     </section>
